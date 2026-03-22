@@ -1,0 +1,41 @@
+CHECKLIST DE PRODUCCIÓN RÁPIDA (30 MIN)
+=======================================
+
+Cliente: _________________ Fecha: _______
+
+□ RECEPCIÓN (5 min)
+  □ Fotos recibidas por WhatsApp
+  □ Información completa del difunto
+  □ Mensaje personal anotado
+  □ Confirmación enviada al cliente
+
+□ RESTAURACIÓN DE FOTOS (10 min)
+  □ Subir a AI Image Upscaler
+  □ Descargar versiones mejoradas
+  □ Organizar por cronología
+  □ Seleccionar foto para talking photo
+
+□ AUDIO Y NARRACIÓN (5 min)
+  □ Generar narración con AI Text-to-Speech
+  □ Crear talking photo con AI
+  □ Seleccionar música de fondo
+  □ Ajustar niveles de audio
+
+□ ENSAMBLAJE FINAL (10 min)
+  □ Importar template en editor
+  □ Insertar fotos en orden
+  □ Agregar transiciones
+  □ Insertar talking photo
+  □ Agregar oraciones y música
+  □ Revisar sincronización
+  □ Exportar en HD
+
+□ ENTREGA
+  □ Subir a Google Drive/Dropbox
+  □ Crear versión para WhatsApp (comprimida)
+  □ Enviar enlaces al cliente
+  □ Confirmar recepción
+  □ Programar seguimiento
+
+NOTAS: _________________________________
+________________________________

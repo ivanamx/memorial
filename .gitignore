@@ -1,0 +1,17 @@
+# Secretos y entorno local
+.env
+.env.local
+.env.*.local
+
+# Dependencias y builds (cuando agregues Node u otro stack)
+node_modules/
+dist/
+build/
+
+# WhatsApp Baileys (sesión local)
+auth_info_baileys/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
