@@ -49,6 +49,10 @@ function mapCloudMessageToInternal(message: CloudWebhookMessage): IncomingWhatsA
 
 export function createApp() {
   const app = express();
+  const publicDir = path.join(process.cwd(), 'public');
+
+  // Serve landing static assets (css/js/images/html) from /public.
+  app.use(express.static(publicDir));
   app.use('/media', express.static(path.join(process.cwd(), 'public', 'media')));
 
   app.get('/health', (_req: Request, res: Response) => {
@@ -56,11 +60,11 @@ export function createApp() {
   });
 
   app.get('/', (_req: Request, res: Response) => {
-    res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+    res.sendFile(path.join(publicDir, 'index.html'));
   });
 
   app.get('/comprar', (_req: Request, res: Response) => {
-    res.sendFile(path.join(process.cwd(), 'public', 'comprar.html'));
+    res.sendFile(path.join(publicDir, 'comprar.html'));
   });
 
   app.get('/pago-exitoso', (_req: Request, res: Response) => {
