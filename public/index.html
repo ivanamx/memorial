@@ -169,6 +169,20 @@
                 max-height: 200px;
             }
         }
+
+        /* Mobile-first layout tuning (desktop untouched) */
+        @media (max-width: 767px) {
+            body {
+                height: auto;
+                min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            #stars-container {
+                position: fixed;
+            }
+        }
     </style>
 </head>
 <body class="relative">
@@ -176,13 +190,13 @@
     <div id="stars-container" class="absolute inset-0 pointer-events-none"></div>
 
     <!-- Contenedor principal -->
-    <div class="relative z-10 h-screen flex items-center justify-center px-4 pt-10 pb-4 sm:px-6 sm:pt-12 sm:pb-5 md:px-8 md:pt-14 md:pb-6">
+    <div class="relative z-10 min-h-screen md:h-screen flex items-start md:items-center justify-center px-4 pt-6 pb-8 sm:px-6 sm:pt-8 sm:pb-8 md:px-8 md:pt-14 md:pb-6">
         <div class="w-full max-w-6xl">
             <!-- Grid principal -->
-            <div class="grid md:grid-cols-2 gap-6 md:gap-7 lg:gap-10 items-center">
+            <div class="grid md:grid-cols-2 gap-5 md:gap-7 lg:gap-10 items-center">
 
                 <!-- Columna izquierda: Contenido -->
-                <div class="text-white space-y-4 sm:space-y-5 fade-in-up">
+                <div class="text-white space-y-3 sm:space-y-5 fade-in-up">
                     <!-- Logo/Título -->
                     <div class="space-y-2">
                         <h1 class="brand-title text-3xl sm:text-4xl md:text-[2.7rem] lg:text-[2.9rem] font-bold leading-[1.04] md:whitespace-nowrap">
@@ -204,13 +218,32 @@
                         con animación, música celestial y un mensaje final lleno de amor.
                     </p>
 
+                    <!-- Video móvil: entre descripción y bullets -->
+                    <div class="md:hidden mt-4">
+                        <div class="video-frame celestial-glow bg-black">
+                            <div class="aspect-video bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
+                                <div class="text-center text-white p-6">
+                                    <i class="fas fa-play-circle text-5xl mb-3 opacity-50"></i>
+                                    <p class="text-base font-semibold">Video de Presentación</p>
+                                    <p class="text-xs text-purple-300 mt-2">Próximamente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Características -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
                         <div class="flex items-start space-x-3">
                             <i class="fas fa-heart text-pink-300 text-xl mt-1"></i>
                             <div>
-                                <h3 class="subtitle-font font-semibold text-white">Emotivo y Personal</h3>
-                                <p class="montserrat-font text-sm text-purple-200">Cada video es único</p>
+                                <h3 class="subtitle-font font-semibold text-white">
+                                    <span class="md:hidden">Personal</span>
+                                    <span class="hidden md:inline">Emotivo y Personal</span>
+                                </h3>
+                                <p class="montserrat-font text-sm text-purple-200">
+                                    <span class="md:hidden">Cada video es emotivo y único</span>
+                                    <span class="hidden md:inline">Cada video es único</span>
+                                </p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -237,14 +270,14 @@
                     </div>
 
                     <!-- CTA Button -->
-                    <div class="pt-4">
+                    <div class="pt-3 md:pt-4">
                         <a href="https://wa.me/5215631549373?text=Hola,%20me%20interesa%20crear%20un%20memorial%20celestial" 
                            target="_blank"
                            class="montserrat-font pulse-button inline-flex items-center justify-center space-x-3 bg-white text-purple-700 px-7 py-3 rounded-full font-semibold text-lg shadow-2xl hover:bg-purple-50 transition-all duration-300 w-full sm:w-auto">
                             <i class="fab fa-whatsapp text-2xl"></i>
                             <span>Crear Memorial Celestial</span>
                         </a>
-                        <p class="montserrat-font mt-5 text-sm text-purple-100">
+                        <p class="montserrat-font mt-4 md:mt-5 text-sm text-purple-100">
                             Envía tus datos y fotos vía WhatsApp, paga y recibe ahí mismo.
                         </p>
                     </div>
@@ -253,7 +286,7 @@
 
                 <!-- Columna derecha: Video -->
                 <div class="fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="video-frame celestial-glow bg-black">
+                    <div class="hidden md:block video-frame celestial-glow bg-black">
                         <!-- Placeholder para video - reemplaza con tu video real -->
                         <div class="aspect-video bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
                             <div class="text-center text-white p-6">
@@ -271,7 +304,7 @@
                     </div>
 
                     <!-- Carrusel de testimonios -->
-                    <div class="mt-10 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 border border-white border-opacity-20">
+                    <div class="mt-8 md:mt-10 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 border border-white border-opacity-20">
                         <div class="flex items-start space-x-3">
                             <i class="fas fa-dove text-pink-300 text-2xl mt-1"></i>
                             <div>
@@ -287,29 +320,45 @@
             </div>
 
             <!-- Footer minimalista -->
-            <div class="mt-5 md:mt-8 text-purple-200 text-sm">
-                <div class="md:hidden flex items-center justify-center space-x-4 mb-2">
+            <div class="mt-6 md:mt-8 text-purple-200 text-sm">
+                <!-- Móvil: copyright → legales → redes -->
+                <p class="md:hidden text-center">&copy; 2026 Memoriales Celestiales. Honrando memorias con amor y tecnología.</p>
+                <nav class="md:hidden flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs sm:text-sm mt-3 mb-3 text-purple-200" aria-label="Avisos legales">
+                    <span class="opacity-70" aria-hidden="true">·</span>
+                    <a href="/terminos-y-condiciones.html" class="hover:text-white transition-colors underline-offset-2 hover:underline">Términos y condiciones</a>
+                    <span class="opacity-70" aria-hidden="true">·</span>
+                    <a href="/politica-de-privacidad.html" class="hover:text-white transition-colors underline-offset-2 hover:underline">Política de privacidad</a>
+                    <span class="opacity-70" aria-hidden="true">·</span>
+                </nav>
+                <div class="md:hidden flex items-center justify-center space-x-4">
                     <span class="text-sm text-purple-200">Síguenos:</span>
-                    <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" class="social-icon text-white hover:text-pink-300 text-xl">
+                    <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-pink-300 text-xl">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" class="social-icon text-white hover:text-blue-300 text-xl">
+                    <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-blue-300 text-xl">
                         <i class="fab fa-facebook"></i>
                     </a>
                 </div>
-                <div class="hidden md:flex items-center justify-between gap-6">
-                    <p>&copy; 2026 Memoriales Celestiales. Honrando memorias con amor y tecnología.</p>
-                    <div class="flex items-center space-x-4 justify-end">
+                <!-- Desktop: copyright · legales · | redes -->
+                <div class="hidden md:flex md:flex-wrap md:items-center md:justify-between gap-x-4 gap-y-2 w-full">
+                    <p class="min-w-0 flex-1 text-sm">&copy; 2026 Memoriales Celestiales. Honrando memorias con amor y tecnología.</p>
+                    <nav class="flex items-center justify-center gap-x-2 text-sm text-purple-200 shrink-0" aria-label="Avisos legales">
+                        <span class="opacity-70" aria-hidden="true">·</span>
+                        <a href="/terminos-y-condiciones.html" class="hover:text-white transition-colors underline-offset-2 hover:underline whitespace-nowrap">Términos y condiciones</a>
+                        <span class="opacity-70" aria-hidden="true">·</span>
+                        <a href="/politica-de-privacidad.html" class="hover:text-white transition-colors underline-offset-2 hover:underline whitespace-nowrap">Política de privacidad</a>
+                        <span class="opacity-70" aria-hidden="true">·</span>
+                    </nav>
+                    <div class="flex items-center space-x-4 shrink-0">
                         <span class="text-sm text-purple-200">Síguenos:</span>
-                        <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" class="social-icon text-white hover:text-pink-300 text-2xl">
+                        <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-pink-300 text-2xl">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" class="social-icon text-white hover:text-blue-300 text-2xl">
+                        <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-blue-300 text-2xl">
                             <i class="fab fa-facebook"></i>
                         </a>
                     </div>
                 </div>
-                <p class="md:hidden text-center">&copy; 2026 Memoriales Celestiales. Honrando memorias con amor y tecnología.</p>
             </div>
         </div>
     </div>
