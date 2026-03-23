@@ -1,5 +1,4 @@
 import http from 'http';
-import { initializeWhatsApp } from './bot/whatsapp';
 import { db } from './config/database';
 import { logger } from './config/logger';
 import { validateConfig, config } from './config/env';
@@ -13,7 +12,6 @@ async function main() {
     const ok = await db.testConnection();
     if (!ok) throw new Error('DB error');
     await ensureMediaDirectory();
-    await initializeWhatsApp();
 
     const app = createApp();
     const port = parseInt(process.env.PORT || '3000', 10);
@@ -21,6 +19,7 @@ async function main() {
     server.listen(port, () => {
       logger.info({ port }, `✅ Servidor HTTP en http://localhost:${port}`);
       logger.info(`   Webhook Stripe: POST ${config.publicUrl}/webhook/stripe`);
+      logger.info(`   Webhook WhatsApp: POST ${config.publicUrl}/webhook/whatsapp`);
     });
   } catch (error) {
     logger.error({ error }, 'Error fatal');

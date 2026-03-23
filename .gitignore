@@ -8,9 +8,6 @@ node_modules/
 dist/
 build/
 
-# WhatsApp Baileys (sesión local)
-auth_info_baileys/
-
 # OS / editor
 .DS_Store
 Thumbs.db

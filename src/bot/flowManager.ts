@@ -1,5 +1,4 @@
-import { proto, WASocket } from '@whiskeysockets/baileys';
-import { Cliente, Orden } from '../types';
+import { Cliente, Orden, IncomingWhatsAppMessage } from '../types';
 import { logger } from '../config/logger';
 import { clientService } from '../services/clientService';
 import { orderService } from '../services/orderService';
@@ -28,12 +27,11 @@ import { formatDate, formatPrice } from '../utils/helpers';
 import { config } from '../config/env';
 
 export async function processFlow(
-  sock: WASocket,
-  message: proto.IWebMessageInfo,
+  message: IncomingWhatsAppMessage,
   cliente: Cliente,
   messageText: string
 ): Promise<void> {
-  const whatsapp = message.key.remoteJid!.replace('@s.whatsapp.net', '');
+  const whatsapp = message.from.replace('whatsapp:', '');
   const etapa = cliente.etapa_actual || 'etapa_1_primer_contacto';
 
   logger.debug({ clienteId: cliente.id, etapa }, 'Procesando etapa');
@@ -512,11 +510,9 @@ async function handlePregunta8ServiciosAdicionales(
 async function handlePregunta9Fotos(
   whatsapp: string,
   cliente: Cliente,
-  message: proto.IWebMessageInfo
+  message: IncomingWhatsAppMessage
 ): Promise<void> {
-  const messageText = message.message?.conversation ||
-                     message.message?.extendedTextMessage?.text ||
-                     '';
+  const messageText = message.text || '';
   
   if (isListo(messageText)) {
     const orden = await orderService.getOrdenActivaByCliente(cliente.id);
@@ -544,7 +540,7 @@ async function handlePregunta9Fotos(
     return;
   }
   
-  const imageMessage = message.message?.imageMessage;
+  const imageMessage = message.media?.type === 'image';
   
   if (imageMessage) {
     const orden = await orderService.getOrdenActivaByCliente(cliente.id);
@@ -616,10 +612,10 @@ async function handlePregunta10AudioReferencia(
 async function handleEsperandoAudio(
   whatsapp: string,
   cliente: Cliente,
-  message: proto.IWebMessageInfo
+  message: IncomingWhatsAppMessage
 ): Promise<void> {
-  const audioMessage = message.message?.audioMessage;
-  const videoMessage = message.message?.videoMessage;
+  const audioMessage = message.media?.type === 'audio';
+  const videoMessage = message.media?.type === 'video';
   
   if (!audioMessage && !videoMessage) {
     await sendTextMessage(
@@ -1047,9 +1043,9 @@ async function handlePregunta15MetodoPago(
 async function handleEsperandoComprobante(
   whatsapp: string,
   cliente: Cliente,
-  message: proto.IWebMessageInfo
+  message: IncomingWhatsAppMessage
 ): Promise<void> {
-  const imageMessage = message.message?.imageMessage;
+  const imageMessage = message.media?.type === 'image';
   
   if (!imageMessage) {
     await sendTextMessage(

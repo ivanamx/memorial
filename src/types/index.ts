@@ -86,3 +86,17 @@ export interface Testimonio {
   sin_testimonio: boolean;
   created_at: Date;
 }
+
+export type IncomingMediaType = 'image' | 'audio' | 'video';
+
+export interface IncomingWhatsAppMessage {
+  from: string;
+  fromMe: boolean;
+  messageId?: string;
+  text: string;
+  media?: {
+    id: string;
+    type: IncomingMediaType;
+    mimeType?: string;
+  };
+}

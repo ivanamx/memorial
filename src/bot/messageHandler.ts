@@ -1,4 +1,3 @@
-import { proto, WASocket } from '@whiskeysockets/baileys';
 import { logger } from '../config/logger';
 import { clientService } from '../services/clientService';
 import { orderService } from '../services/orderService';
@@ -7,17 +6,16 @@ import { isAyuda, normalizeText } from '../utils/normalizers';
 import { sendTextMessage } from './whatsapp';
 import { config } from '../config/env';
 import { esInactivo } from '../utils/helpers';
+import { IncomingWhatsAppMessage } from '../types';
 
 export async function handleIncomingMessage(
-  sock: WASocket,
-  message: proto.IWebMessageInfo
+  message: IncomingWhatsAppMessage
 ): Promise<void> {
   try {
-    const from = message.key.remoteJid!;
-    const whatsapp = from.replace('@s.whatsapp.net', '');
-    const messageText = message.message?.conversation ||
-                       message.message?.extendedTextMessage?.text ||
-                       '';
+    const from = message.from;
+    if (!from) return;
+    const whatsapp = from.replace('whatsapp:', '');
+    const messageText = message.text || '';
 
     logger.info({ from, text: messageText.substring(0, 100) }, 'Mensaje recibido');
 
@@ -70,7 +68,7 @@ export async function handleIncomingMessage(
       await clientService.reanudarBot(cliente.id);
       
       const clienteActualizado = await clientService.findOrCreateByWhatsApp(whatsapp);
-      await processFlow(sock, message, clienteActualizado, messageText);
+      await processFlow(message, clienteActualizado, messageText);
       
       return;
     }
@@ -82,7 +80,7 @@ export async function handleIncomingMessage(
     }
 
     // PRIORIDAD 4: Procesar flujo normal
-    await processFlow(sock, message, cliente, messageText);
+    await processFlow(message, cliente, messageText);
 
   } catch (error) {
     logger.error({ error }, 'Error en handleIncomingMessage');
