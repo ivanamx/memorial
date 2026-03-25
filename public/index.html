@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memoriales Celestiales - Videos Conmemorativos con IA</title>
-    <meta name="description" content="Honra la memoria de tus seres queridos con videos conmemorativos únicos creados con inteligencia artificial. Un último mensaje lleno de amor y recuerdos eternos.">
+    <title>Memoriales Celestiales — El puente entre la memoria y la vida</title>
+    <meta name="description" content="Preserva el legado de quienes amas: fotos antiguas y voces que vuelven con realismo emotivo. Para familias en duelo y para quien quiere que las nuevas generaciones conozcan su historia.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,7 +12,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,21 +24,110 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-deep: #030510;
+            --bg-midnight: #0a1022;
+            --bg-elevated: #121a32;
+            --gold: #c9a962;
+            --gold-soft: rgba(201, 169, 98, 0.35);
+            --gold-muted: #9a8350;
+            --silver: #b8c4d4;
+            --mist: #c5d0e0;
+            --mist-dim: #8b9cb3;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(201, 169, 98, 0.18);
+            --glass-highlight: rgba(255, 255, 255, 0.08);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             overflow: hidden;
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--mist);
+            background:
+                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(30, 58, 95, 0.45) 0%, transparent 55%),
+                radial-gradient(ellipse 90% 60% at 100% 50%, rgba(15, 30, 60, 0.5) 0%, transparent 45%),
+                linear-gradient(165deg, var(--bg-midnight) 0%, var(--bg-deep) 45%, #050814 100%);
+        }
+
+        @media (min-width: 768px) {
+            body {
+                overflow: hidden;
+            }
+
+            #stars-container {
+                position: fixed;
+            }
         }
 
         .brand-title {
-            font-family: 'Marcellus', serif;
-            letter-spacing: 0.01em;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.02em;
+            font-weight: 600;
         }
 
         .subtitle-font {
-            font-family: 'Marcellus', serif;
-            letter-spacing: 0.01em;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.02em;
+            font-weight: 500;
+        }
+
+        .text-gold {
+            color: var(--gold);
+        }
+
+        .text-gold-muted {
+            color: var(--gold-muted);
+        }
+
+        .text-gold-45 {
+            color: rgba(201, 169, 98, 0.45);
+        }
+
+        .text-gold-50 {
+            color: rgba(201, 169, 98, 0.5);
+        }
+
+        .text-gold-70 {
+            color: rgba(201, 169, 98, 0.7);
+        }
+
+        .text-mist {
+            color: var(--mist);
+        }
+
+        .text-mist-dim {
+            color: var(--mist-dim);
+        }
+
+        .accent-line {
+            height: 3px;
+            width: 5rem;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, var(--gold) 0%, rgba(184, 196, 212, 0.6) 100%);
+            box-shadow: 0 0 20px var(--gold-soft);
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border);
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 var(--glass-highlight);
+        }
+
+        .glass-panel--soft {
+            background: rgba(255, 255, 255, 0.035);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(184, 196, 212, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .hover-gold:hover {
+            color: var(--gold);
         }
 
         .montserrat-font {
@@ -55,8 +144,9 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: white;
+            background: #e8eef8;
             border-radius: 50%;
+            box-shadow: 0 0 4px rgba(201, 169, 98, 0.35);
             animation: twinkle 3s infinite;
         }
 
@@ -80,65 +170,141 @@
         @keyframes pulse-soft {
             0%, 100% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+                box-shadow: 0 0 0 0 rgba(201, 169, 98, 0.45);
             }
             50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+                transform: scale(1.02);
+                box-shadow: 0 0 0 12px rgba(201, 169, 98, 0);
             }
         }
 
         .pulse-button {
-            animation: pulse-soft 2s infinite;
+            animation: pulse-soft 2.5s infinite;
         }
 
-        /* Efecto de brillo celestial */
-        @keyframes celestial-glow {
+        @keyframes frame-glow {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
-                            0 0 40px rgba(102, 126, 234, 0.2);
+                box-shadow:
+                    0 0 0 1px rgba(201, 169, 98, 0.25),
+                    0 24px 64px rgba(0, 0, 0, 0.55),
+                    0 0 48px rgba(201, 169, 98, 0.08);
             }
             50% {
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.5),
-                            0 0 60px rgba(102, 126, 234, 0.4);
+                box-shadow:
+                    0 0 0 1px rgba(201, 169, 98, 0.4),
+                    0 28px 72px rgba(0, 0, 0, 0.5),
+                    0 0 56px rgba(201, 169, 98, 0.14);
             }
         }
 
-        .celestial-glow {
-            animation: celestial-glow 3s ease-in-out infinite;
+        .frame-glow {
+            animation: frame-glow 4s ease-in-out infinite;
         }
 
-        /* Video container con efecto de marco */
+        /* Marco ajustado al propio video (sin franjas laterales/superiores) */
+        .hero-video-outer {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .hero-video-wrap {
+            position: relative;
+            width: max-content;
+            max-width: 100%;
+            line-height: 0;
+            background: #080c18;
+        }
+
+        .hero-video-el {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: min(42vh, 340px);
+            background: #080c18;
+        }
+
+        @media (min-width: 768px) {
+            .hero-video-el {
+                max-height: min(48vh, 380px);
+            }
+        }
+
+        .hero-video-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 1rem;
+            border: none;
+            background: rgba(5, 8, 20, 0.45);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .hero-video-overlay:hover {
+            background: rgba(5, 8, 20, 0.28);
+        }
+
+        .hero-video-overlay:focus-visible {
+            outline: 2px solid rgba(201, 169, 98, 0.65);
+            outline-offset: 2px;
+        }
+
+        .hero-video-overlay.is-hidden {
+            display: none;
+        }
+
+        /* Vista previa móvil: inline en página (iOS / Android); pantalla completa con controles nativos */
+        .hero-video-mobile-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            max-height: min(56vh, 420px);
+            background: #080c18;
+            -webkit-touch-callout: none;
+        }
+
+        .hero-video-mobile-el {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #080c18;
+        }
+
+        .hero-video-overlay--touch {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        /* Video container: marco premium + vidrio */
         .video-frame {
             position: relative;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 169, 98, 0.22);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
-        .video-frame::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
-            border-radius: 16px;
-            z-index: -1;
-            animation: rotate-gradient 3s linear infinite;
-        }
-
-        @keyframes rotate-gradient {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .video-placeholder-inner {
+            background: linear-gradient(145deg, rgba(18, 26, 50, 0.95) 0%, rgba(8, 12, 28, 0.98) 100%);
         }
 
         /* Scroll suave para contenido interno */
         .content-scroll {
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+            scrollbar-color: rgba(201, 169, 98, 0.28) transparent;
         }
 
         .content-scroll::-webkit-scrollbar {
@@ -150,17 +316,78 @@
         }
 
         .content-scroll::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(201, 169, 98, 0.25);
             border-radius: 3px;
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, #d4b978 0%, #b8924a 50%, #9a7d42 100%);
+            color: #0a0e1a;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(201, 169, 98, 0.3);
+        }
+
+        .btn-cta:hover {
+            background: linear-gradient(135deg, #e0c88a 0%, #c9a962 55%, #a88948 100%);
+            color: #050810;
+        }
+
+        .memorial-modal {
+            display: none;
+        }
+
+        .memorial-modal.memorial-modal--visible {
+            display: flex;
+        }
+
+        .btn-memorial-outline {
+            border: 1px solid rgba(201, 169, 98, 0.45);
+            color: var(--gold-muted);
+            background: rgba(201, 169, 98, 0.06);
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .btn-memorial-outline:hover {
+            border-color: rgba(201, 169, 98, 0.75);
+            color: var(--gold);
+            background: rgba(201, 169, 98, 0.12);
+        }
+
+        .testimonial-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(201, 169, 98, 0.35);
+            color: var(--gold-muted);
+            background: rgba(255, 255, 255, 0.04);
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .testimonial-nav-btn:hover {
+            border-color: rgba(201, 169, 98, 0.65);
+            color: var(--gold);
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .testimonial-nav-btn:focus-visible {
+            outline: 2px solid rgba(201, 169, 98, 0.5);
+            outline-offset: 2px;
         }
 
         /* Efecto hover en iconos sociales */
         .social-icon {
             transition: all 0.3s ease;
+            color: var(--silver);
         }
 
         .social-icon:hover {
             transform: translateY(-5px) scale(1.1);
+            color: var(--gold);
         }
 
         /* Responsive adjustments */
@@ -190,191 +417,228 @@
     <div id="stars-container" class="absolute inset-0 pointer-events-none"></div>
 
     <!-- Contenedor principal -->
-    <div class="relative z-10 min-h-screen md:h-screen flex items-start md:items-center justify-center px-4 pt-6 pb-8 sm:px-6 sm:pt-8 sm:pb-8 md:px-8 md:pt-14 md:pb-6">
-        <div class="w-full max-w-6xl">
+    <div class="relative z-10 min-h-screen md:h-screen md:max-h-screen md:overflow-hidden flex items-start md:items-center justify-center px-4 pt-6 pb-8 sm:px-6 sm:pt-8 sm:pb-8 md:px-8 md:py-4 lg:px-10">
+        <div class="w-full max-w-6xl lg:max-w-7xl">
             <!-- Grid principal -->
-            <div class="grid md:grid-cols-2 gap-5 md:gap-7 lg:gap-10 items-center">
+            <div class="grid md:grid-cols-2 gap-5 md:gap-8 lg:gap-10 md:items-stretch">
 
                 <!-- Columna izquierda: Contenido -->
-                <div class="text-white space-y-3 sm:space-y-5 fade-in-up">
+                <div class="text-mist space-y-3 sm:space-y-5 md:space-y-3 fade-in-up rounded-2xl md:rounded-3xl md:px-5 md:py-4 glass-panel--soft">
                     <!-- Logo/Título -->
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-3 sm:gap-4">
-                            <img src="/MemorialesLogo.png" alt="Memoriales Celestiales" class="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain">
-                            <h1 class="brand-title text-3xl sm:text-4xl md:text-[2.7rem] lg:text-[2.9rem] font-bold leading-[1.04] md:whitespace-nowrap">
-                                <span class="text-white">Memoriales</span> <span class="text-purple-200">Celestiales</span>
+                    <div class="space-y-1.5 md:space-y-2">
+                        <div class="flex items-center gap-3 sm:gap-4 md:gap-3.5">
+                            <img src="/MemorialesLogo.png" alt="Memoriales Celestiales" class="h-12 sm:h-14 md:h-[3.25rem] lg:h-14 w-auto object-contain drop-shadow-[0_0_12px_rgba(201,169,98,0.25)]">
+                            <h1 class="brand-title text-3xl sm:text-4xl md:text-[2.35rem] lg:text-[2.5rem] leading-[1.04] md:whitespace-nowrap text-white">
+                                <span class="text-white">Memoriales</span> <span class="text-gold">Celestiales</span>
                             </h1>
                         </div>
-                        <div class="h-1 w-20 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full"></div>
+                        <div class="accent-line"></div>
                     </div>
 
                     <!-- Descripción principal -->
-                    <p class="subtitle-font text-lg sm:text-xl md:text-2xl font-light leading-relaxed text-purple-100">
-                        Un último mensaje de amor.<br>
-                        Recuerdos que perduran para siempre.
+                    <p class="subtitle-font text-lg sm:text-xl md:text-xl lg:text-2xl md:leading-relaxed text-mist">
+                        El puente entre la memoria y la vida.<br>
+                        <span class="not-italic text-mist-dim font-normal leading-relaxed">Preservar un instante con quien amas.</span>
                     </p>
 
                     <!-- Descripción secundaria -->
-                    <p class="montserrat-font text-sm sm:text-base md:text-[1.02rem] text-purple-200 leading-relaxed">
-                        <span class="md:hidden">Honramos la memoria de tus seres queridos con videos únicos. Usando IA, transformamos tus fotos en un tributo emotivo con animación, música celestial y un mensaje final lleno de amor.</span>
-                        <span class="hidden md:block">Honramos la memoria de tus seres queridos con videos conmemorativos únicos. Usando inteligencia artificial, transformamos tus fotos en un tributo emotivo con animación, música celestial y un mensaje final lleno de amor.</span>
+                    <p class="montserrat-font text-sm sm:text-base md:text-[0.875rem] md:leading-[1.55] text-mist-dim leading-relaxed">
+                        <span class="md:hidden">Para quien atraviesa un duelo reciente o para quien quiere que sus hijos conozcan la voz del abuelo: damos trascendencia a tu historia. Con realismo emotivo, tu foto cobra vida y el recuerdo se siente cercano otra vez.</span>
+                        <span class="hidden md:block">Para quien atraviesa un duelo reciente o para quien quiere que las nuevas generaciones conozcan la voz de quien ya no está: damos trascendencia a tu historia familiar. Con realismo emotivo, la imagen cobra vida y el recuerdo vuelve a sentirse presente.</span>
                     </p>
 
-                    <!-- Video móvil: entre descripción y bullets -->
+                    <!-- Video móvil: reproducción inline; pantalla completa desde controles del sistema -->
                     <div class="md:hidden mt-4">
-                        <div class="video-frame celestial-glow bg-black">
-                            <div class="aspect-video bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
-                                <div class="text-center text-white p-6">
-                                    <i class="fas fa-play-circle text-5xl mb-3 opacity-50"></i>
-                                    <p class="text-base font-semibold">Video de Presentación</p>
-                                    <p class="text-xs text-purple-300 mt-2">Próximamente</p>
-                                </div>
+                        <div class="video-frame frame-glow bg-black/40 overflow-hidden">
+                            <div class="hero-video-mobile-box">
+                                <video id="hero-presentacion-video-mobile"
+                                    class="hero-video-mobile-el"
+                                    playsinline
+                                    webkit-playsinline
+                                    preload="metadata"
+                                    controlslist="nodownload">
+                                    <source src="/presentacion.mp4" type="video/mp4">
+                                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                                </video>
+                                <button type="button" id="hero-video-play-overlay-mobile" class="hero-video-overlay hero-video-overlay--touch" aria-label="Reproducir vista previa en esta pantalla">
+                                    <i class="fas fa-play-circle text-5xl text-gold-50 opacity-95 drop-shadow-lg" aria-hidden="true"></i>
+                                    <span class="subtitle-font text-base font-semibold text-white">Vista previa</span>
+                                    <span class="montserrat-font text-xs text-mist-dim text-center px-2 max-w-[18rem]">Realismo emotivo en movimiento · Pantalla completa en el reproductor</span>
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- CTA Button (solo móvil: antes de bullets) -->
                     <div class="md:hidden pt-3">
-                        <a href="https://wa.me/5215631549373?text=Hola,%20me%20interesa%20crear%20un%20memorial%20celestial" 
+                        <a href="https://wa.me/5215631549373?text=Hola,%20quiero%20preservar%20un%20legado%20con%20Memoriales%20Celestiales" 
                            target="_blank"
-                           class="montserrat-font pulse-button inline-flex items-center justify-center space-x-3 bg-white text-purple-700 px-7 py-3 rounded-full font-semibold text-lg shadow-2xl hover:bg-purple-50 transition-all duration-300 w-full sm:w-auto">
+                           rel="noopener noreferrer"
+                           class="montserrat-font pulse-button btn-cta inline-flex items-center justify-center space-x-3 px-7 py-3 rounded-full font-semibold text-lg transition-all duration-300 w-full sm:w-auto">
                             <i class="fab fa-whatsapp text-2xl"></i>
-                            <span>Crear Memorial Celestial</span>
+                            <span>Crear Memorial Ahora</span>
                         </a>
-                        <p class="montserrat-font mt-4 text-sm text-purple-100">
-                            Envía tus datos y fotos vía WhatsApp, paga y recibe ahí mismo.
+                        <p class="montserrat-font mt-4 text-sm text-mist-dim">
+                            En un solo chat: envío de fotos/videos y entrega de video final.
                         </p>
                     </div>
 
+                    <!-- Características + CTA desktop: más aire solo en esta zona (desktop) -->
+                    <div class="mt-6 md:mt-2 md:pt-4 md:pb-6 md:space-y-6 md:border-t md:border-white/[0.06]">
                     <!-- Características -->
-                    <div class="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4 md:gap-x-4 md:gap-y-4">
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-heart text-pink-300 text-xl mt-1"></i>
+                            <i class="fas fa-infinity text-gold text-xl md:text-lg mt-1 opacity-90"></i>
                             <div>
-                                <h3 class="subtitle-font font-semibold text-white">
-                                    <span class="md:hidden">Personal</span>
-                                    <span class="hidden md:inline">Emotivo y Personal</span>
+                                <h3 class="subtitle-font font-semibold text-white text-sm md:text-base">
+                                    <span class="md:hidden">Legado vivo</span>
+                                    <span class="hidden md:inline">Legado que perdura</span>
                                 </h3>
-                                <p class="montserrat-font text-sm text-purple-200">
-                                    <span class="md:hidden">Cada video es emotivo y único</span>
-                                    <span class="hidden md:inline">Cada video es único</span>
+                                <p class="montserrat-font text-sm text-mist-dim">
+                                    <span class="md:hidden">Cada pieza es única y tuya</span>
+                                    <span class="hidden md:inline">Revive y perdura tu historia</span>
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-magic text-purple-300 text-xl mt-1"></i>
+                            <i class="fas fa-wand-magic-sparkles text-gold text-xl md:text-lg mt-1 opacity-90"></i>
                             <div>
-                                <h3 class="subtitle-font font-semibold text-white">Tecnología IA</h3>
-                                <p class="montserrat-font text-sm text-purple-200">Animación profesional</p>
+                                <h3 class="subtitle-font font-semibold text-white text-sm md:text-base">Realismo emotivo</h3>
+                                <p class="montserrat-font text-sm text-mist-dim">La foto cobra vida con naturalidad</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-music text-blue-300 text-xl mt-1"></i>
+                            <i class="fas fa-music text-[#b8c4d4] text-xl md:text-lg mt-1"></i>
                             <div>
-                                <h3 class="subtitle-font font-semibold text-white">Música Celestial</h3>
-                                <p class="montserrat-font text-sm text-purple-200">Melodías emotivas</p>
+                                <h3 class="subtitle-font font-semibold text-white text-sm md:text-base">Banda sonora a medida</h3>
+                                <p class="montserrat-font text-sm text-mist-dim">Ambiente cinematográfico y respetuoso</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-clock text-yellow-300 text-xl mt-1"></i>
+                            <i class="fas fa-bolt text-gold-muted text-xl md:text-lg mt-1"></i>
                             <div>
-                                <h3 class="subtitle-font font-semibold text-white">Entrega Rápida</h3>
-                                <p class="montserrat-font text-sm text-purple-200">Maximo 24 horas</p>
+                                <h3 class="subtitle-font font-semibold text-white text-sm md:text-base">Entrega ágil</h3>
+                                <p class="montserrat-font text-sm text-mist-dim">En hasta 24 horas</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- CTA Button (solo desktop: después de bullets) -->
-                    <div class="hidden md:block pt-3 md:pt-4">
-                        <a href="https://wa.me/5215631549373?text=Hola,%20me%20interesa%20crear%20un%20memorial%20celestial" 
-                           target="_blank"
-                           class="montserrat-font pulse-button inline-flex items-center justify-center space-x-3 bg-white text-purple-700 px-7 py-3 rounded-full font-semibold text-lg shadow-2xl hover:bg-purple-50 transition-all duration-300 w-full sm:w-auto">
-                            <i class="fab fa-whatsapp text-2xl"></i>
-                            <span>Crear Memorial Celestial</span>
-                        </a>
-                        <p class="montserrat-font mt-4 md:mt-5 text-sm text-purple-100">
-                            Envía tus datos y fotos vía WhatsApp, paga y recibe ahí mismo.
+                    <div class="hidden md:block">
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                            <a href="https://wa.me/5215631549373?text=Hola,%20quiero%20preservar%20un%20legado%20con%20Memoriales%20Celestiales" 
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="montserrat-font pulse-button btn-cta inline-flex items-center justify-center space-x-2.5 px-5 py-2 rounded-full font-semibold text-base transition-all duration-300 shrink-0">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                                <span>Crear Memorial Ahora</span>
+                            </a>
+                            <p class="subtitle-font text-lg leading-tight text-white whitespace-nowrap">
+                                <span class="text-mist-dim font-medium text-[0.9375rem]">Desde</span>
+                                <span class="text-gold font-semibold tracking-wide"> 800 MXN</span>
+                            </p>
+                        </div>
+                        <p class="montserrat-font mt-4 text-xs md:text-[0.8125rem] text-mist-dim md:leading-relaxed">
+                            En un solo chat: envío de fotos/videos y entrega de video final.
                         </p>
+                    </div>
                     </div>
 
                 </div>
 
-                <!-- Columna derecha: Video -->
-                <div class="fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="hidden md:block video-frame celestial-glow bg-black">
-                        <!-- Placeholder para video - reemplaza con tu video real -->
-                        <div class="aspect-video bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
-                            <div class="text-center text-white p-6">
-                                <i class="fas fa-play-circle text-6xl mb-4 opacity-50"></i>
-                                <p class="text-lg font-semibold">Video de Presentación</p>
-                                <p class="text-sm text-purple-300 mt-2">Próximamente</p>
+                <!-- Columna derecha: Video + testimonial + enlaces -->
+                <div class="fade-in-up md:flex md:flex-col md:h-full md:min-h-0" style="animation-delay: 0.3s;">
+                    <div class="hero-video-outer hidden md:flex shrink-0">
+                        <div class="video-frame frame-glow bg-black/40 overflow-hidden w-fit max-w-full">
+                            <div class="hero-video-wrap">
+                            <!-- Coloca tu archivo en /presentacion.mp4 o cambia las rutas del <source> -->
+                            <video id="hero-presentacion-video" class="hero-video-el" playsinline webkit-playsinline preload="metadata" controlslist="nodownload">
+                                <source src="/presentacion.mp4" type="video/mp4">
+                                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                            </video>
+                            <button type="button" id="hero-video-play-overlay" class="hero-video-overlay hero-video-overlay--touch" aria-label="Reproducir vista previa en esta ventana">
+                                <i class="fas fa-play-circle text-6xl md:text-5xl text-gold-45 opacity-95 drop-shadow-lg" aria-hidden="true"></i>
+                                <span class="subtitle-font text-base font-semibold text-white">Vista previa</span>
+                                <span class="montserrat-font text-xs text-mist-dim text-center">Realismo emotivo en movimiento · Pantalla completa desde los controles del reproductor</span>
+                            </button>
                             </div>
                         </div>
-                        <!-- Cuando tengas el video, usa esto:
-                        <video controls class="w-full h-full object-cover" poster="tu-poster.jpg">
-                            <source src="tu-video.mp4" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                        -->
                     </div>
 
                     <!-- Carrusel de testimonios -->
-                    <div class="mt-8 md:mt-10 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 border border-white border-opacity-20">
-                        <div class="flex items-start space-x-3">
-                            <i class="fas fa-dove text-pink-300 text-2xl mt-1"></i>
-                            <div>
-                                <h4 id="testimonial-name" class="subtitle-font text-white font-semibold mb-1">Paola R. - Queretaro</h4>
-                                <p id="testimonial-text" class="montserrat-font text-sm text-purple-200 min-h-[72px]">
-                                    Nos ayudaron a revivir momentos de mi mama desde sus fotos favoritas.
-                                    La foto hablada con su ultimo mensaje nos hizo llorar y sanar en familia.
+                    <div class="mt-8 md:mt-4 rounded-2xl p-4 sm:p-5 md:p-3.5 md:px-4 glass-panel shrink-0">
+                        <div class="flex items-start gap-2 sm:gap-3 md:gap-3.5">
+                            <i class="fas fa-quote-left text-gold-70 text-xl mt-1 shrink-0" aria-hidden="true"></i>
+                            <div class="min-w-0 flex-1">
+                                <h4 id="testimonial-name" class="subtitle-font text-white font-semibold mb-1.5">Paola R. — Querétaro</h4>
+                                <p id="testimonial-text" class="montserrat-font text-sm md:text-[0.8125rem] text-mist-dim min-h-[72px] md:min-h-[3rem] md:leading-snug leading-relaxed">
+                                    Nos ayudaron a revivir momentos de mi mamá desde sus fotos favoritas.
+                                    La foto hablada con su mensaje nos hizo llorar y sanar en familia.
                                 </p>
+                                <div class="mt-3 md:mt-3.5 flex w-full justify-center">
+                                    <button type="button" id="btn-ver-memorial" class="montserrat-font btn-memorial-outline inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
+                                        <i class="fas fa-film text-gold/80 text-sm" aria-hidden="true"></i>
+                                        Ver memorial
+                                    </button>
+                                </div>
+                                <div class="mt-3 flex items-center justify-between gap-3" role="group" aria-label="Navegar testimonios">
+                                    <button type="button" id="testimonial-prev" class="testimonial-nav-btn shrink-0" aria-label="Testimonio anterior">
+                                        <i class="fas fa-chevron-left text-sm" aria-hidden="true"></i>
+                                    </button>
+                                    <p class="montserrat-font text-center text-xs text-mist-dim tabular-nums" aria-live="polite">
+                                        <span id="testimonial-current">1</span> / <span id="testimonial-total">5</span>
+                                    </p>
+                                    <button type="button" id="testimonial-next" class="testimonial-nav-btn shrink-0" aria-label="Testimonio siguiente">
+                                        <i class="fas fa-chevron-right text-sm" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Copyright, legales y redes (espacio bajo testimonial; en desktop anclado al pie de la columna) -->
+                    <div class="mt-8 text-mist-dim text-sm md:mt-auto md:pt-5 md:pb-0.5 border-t border-white/10 md:border-t-0">
+                        <p class="text-center md:text-left text-xs sm:text-sm mb-3 md:mb-3 leading-snug">&copy; 2026 Memoriales Celestiales. Preservación emocional con realismo y respeto.</p>
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-xs md:text-[0.8125rem]" role="navigation" aria-label="Avisos legales y redes">
+                            <a href="/terminos-y-condiciones.html" class="hover-gold transition-colors underline-offset-2 hover:underline whitespace-nowrap">Términos y condiciones</a>
+                            <span class="opacity-70" aria-hidden="true">·</span>
+                            <a href="/politica-de-privacidad.html" class="hover-gold transition-colors underline-offset-2 hover:underline whitespace-nowrap">Política de privacidad</a>
+                            <span class="opacity-50 mx-1 hidden md:inline" aria-hidden="true">|</span>
+                            <span class="text-mist-dim whitespace-nowrap">Síguenos:</span>
+                            <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" rel="noopener noreferrer" class="social-icon text-base sm:text-lg md:text-base" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" rel="noopener noreferrer" class="social-icon text-base sm:text-lg md:text-base" aria-label="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Footer minimalista -->
-            <div class="mt-6 md:mt-4 text-purple-200 text-sm">
-                <!-- Móvil: copyright → legales → redes -->
-                <p class="md:hidden text-center">&copy; 2026 Memoriales Celestiales. Honrando memorias con amor y tecnología.</p>
-                <nav class="md:hidden flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs sm:text-sm mt-3 mb-3 text-purple-200" aria-label="Avisos legales">
-                    <span class="opacity-70" aria-hidden="true">·</span>
-                    <a href="/terminos-y-condiciones.html" class="hover:text-white transition-colors underline-offset-2 hover:underline">Términos y condiciones</a>
-                    <span class="opacity-70" aria-hidden="true">·</span>
-                    <a href="/politica-de-privacidad.html" class="hover:text-white transition-colors underline-offset-2 hover:underline">Política de privacidad</a>
-                    <span class="opacity-70" aria-hidden="true">·</span>
-                </nav>
-                <div class="md:hidden flex items-center justify-center space-x-4">
-                    <span class="text-sm text-purple-200">Síguenos:</span>
-                    <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-pink-300 text-xl">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-blue-300 text-xl">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                </div>
-                <!-- Desktop: copyright · legales · | redes -->
-                <div class="hidden md:flex md:flex-wrap md:items-center md:justify-between gap-x-4 gap-y-2 w-full">
-                    <p class="min-w-0 flex-1 text-sm">&copy; 2026 Memoriales Celestiales. Honrando memorias con amor y tecnología.</p>
-                    <nav class="flex items-center justify-center gap-x-2 text-sm text-purple-200 shrink-0" aria-label="Avisos legales">
-                        <span class="opacity-70" aria-hidden="true">·</span>
-                        <a href="/terminos-y-condiciones.html" class="hover:text-white transition-colors underline-offset-2 hover:underline whitespace-nowrap">Términos y condiciones</a>
-                        <span class="opacity-70" aria-hidden="true">·</span>
-                        <a href="/politica-de-privacidad.html" class="hover:text-white transition-colors underline-offset-2 hover:underline whitespace-nowrap">Política de privacidad</a>
-                        <span class="opacity-70" aria-hidden="true">·</span>
-                    </nav>
-                    <div class="flex items-center space-x-4 shrink-0">
-                        <span class="text-sm text-purple-200">Síguenos:</span>
-                        <a href="https://www.instagram.com/memoriales.celestiales/" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-pink-300 text-2xl">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/memoriales.celestiales" target="_blank" rel="noopener noreferrer" class="social-icon text-white hover:text-blue-300 text-2xl">
-                            <i class="fab fa-facebook"></i>
-                        </a>
+    <!-- Modal: memorial de demostración -->
+    <div id="memorial-demo-modal" class="memorial-modal fixed inset-0 z-[100] items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="memorial-demo-heading" aria-hidden="true">
+        <div class="absolute inset-0 bg-black/75 backdrop-blur-md" data-memorial-demo-close tabindex="-1"></div>
+        <div class="memorial-modal__panel relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl glass-panel border border-white/12 p-5 sm:p-6 shadow-2xl content-scroll">
+            <button type="button" class="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full text-mist-dim hover:bg-white/10 hover:text-white transition-colors" data-memorial-demo-close aria-label="Cerrar">
+                <i class="fas fa-times text-lg" aria-hidden="true"></i>
+            </button>
+            <p class="subtitle-font text-gold text-sm mb-1 tracking-wide">Memorial de demostración</p>
+            <h2 id="memorial-demo-heading" class="subtitle-font text-white text-xl sm:text-2xl mb-0.5 pr-10">Elena M.</h2>
+            <p id="memorial-demo-years" class="montserrat-font text-mist-dim text-sm mb-4">1952 — 2023</p>
+            <div class="video-frame rounded-xl overflow-hidden mb-4 border border-white/8">
+                <div class="aspect-video flex min-h-[160px] items-center justify-center bg-gradient-to-b from-[#151d38] to-[#080c18]">
+                    <div class="text-center px-6 py-8">
+                        <i class="fas fa-play-circle text-5xl sm:text-6xl text-gold-45 mb-3 opacity-90" aria-hidden="true"></i>
+                        <p class="montserrat-font text-sm text-mist font-medium">Vista previa del memorial (ejemplo)</p>
+                        <p class="montserrat-font text-xs text-mist-dim mt-2 max-w-xs mx-auto">Así podría verse tu video con fotografía animada y mensaje con voz.</p>
                     </div>
                 </div>
             </div>
+            <p id="memorial-demo-snippet" class="montserrat-font text-mist italic text-sm leading-relaxed text-center px-1"></p>
+            <p class="montserrat-font mt-4 text-xs text-mist-dim text-center leading-relaxed">Contenido con permiso de publicación. Cada familia recibe un memorial único y confidencial.</p>
         </div>
     </div>
 
@@ -397,36 +661,91 @@
 
         const testimonials = [
             {
-                name: 'Paola R. - Queretaro',
-                text: 'Nos ayudaron a revivir momentos de mi mama desde sus fotos favoritas. La foto hablada con su ultimo mensaje nos hizo llorar y sanar en familia.'
+                name: 'Paola R. — Querétaro',
+                text: 'Nos ayudaron a revivir momentos de mi mamá desde sus fotos favoritas. La foto hablada con su mensaje nos hizo llorar y sanar en familia.',
+                memorialName: 'Elena M.',
+                memorialYears: '1952 — 2023',
+                memorialSnippet: '«Gracias por cada risa que dejaste en esta casa. Te llevamos en el corazón cada día.»'
             },
             {
-                name: 'Gabriela M. - Guadalajara',
-                text: 'El video quedo muy humano y respetuoso. Ver a mi abuelita "hablarnos" en su despedida fue algo que nunca vamos a olvidar.'
+                name: 'Gabriela M. — Zapopan',
+                text: 'El video quedó muy humano y respetuoso. Ver a mi abuelita hablarnos de nuevo y la escuchara su bisnieto; algo que nunca vamos a olvidar.',
+                memorialName: 'Lucía Hernández',
+                memorialYears: '1938 — 2024',
+                memorialSnippet: '«Abuelita, tu ternura sigue guiándonos. Este memorial es para que las pequeñas de la familia te conozcan como te recordamos.»'
             },
             {
-                name: 'Fernanda T. - CDMX',
-                text: 'Pensamos que seria algo frio, pero fue todo lo contrario. Cada imagen conto su historia y el mensaje final se sintio como un abrazo.'
+                name: 'Fernanda T. — CDMX',
+                text: 'Pensamos que sería algo frío, pero fue todo lo contrario. Cada imagen contó su historia y el mensaje final se sintió como un abrazo.',
+                memorialName: 'Roberto Vega',
+                memorialYears: '1960 — 2023',
+                memorialSnippet: '«Papá, guardamos tus enseñanzas en silencio y en canción. Gracias por enseñarnos a abrazar la vida.»'
             },
             {
-                name: 'Rocio L. - Monterrey',
-                text: 'Gracias por la sensibilidad en cada detalle. Mi familia pudo volver a sonreir recordando su vida con amor y no solo con tristeza.'
+                name: 'Rocío L. — Torreón',
+                text: 'Gracias por la sensibilidad en cada detalle. Mi familia pudo volver a sonreír recordando su vida con amor y no solo con tristeza.',
+                memorialName: 'Marisol Cantú',
+                memorialYears: '1955 — 2022',
+                memorialSnippet: '«Mamá, tu luz no se apaga: vive en cada recuerdo que compartimos en familia. Te queremos para siempre.»'
             },
             {
-                name: 'Javier C. - Puebla',
-                text: 'Nunca habia visto algo asi. Con las fotos de mi papa lograron un homenaje muy digno, y su ultimo mensaje nos dio mucha paz.'
+                name: 'Javier C. — Toluca',
+                text: 'Nunca había visto algo así. Con las fotos de mi papá lograron un homenaje muy digno; su voz en el mensaje final nos dio paz.',
+                memorialName: 'Francisco C.',
+                memorialYears: '1948 — 2021',
+                memorialSnippet: '«Gracias por tu voz firme y tu risa tranquila. Este homenaje es el abrazo que ya no te podemos dar.»'
             }
         ];
+
+        const TESTIMONIAL_AUTO_MS = 12000;
 
         let testimonialIndex = 0;
         let testimonialTimer = null;
 
+        function renderMemorialDemo(index) {
+            const t = testimonials[index];
+            const heading = document.getElementById('memorial-demo-heading');
+            const years = document.getElementById('memorial-demo-years');
+            const snippet = document.getElementById('memorial-demo-snippet');
+            if (!heading || !years || !snippet) return;
+            heading.textContent = t.memorialName;
+            years.textContent = t.memorialYears;
+            snippet.textContent = t.memorialSnippet;
+        }
+
+        function openMemorialDemoModal() {
+            const modal = document.getElementById('memorial-demo-modal');
+            if (!modal) return;
+            const lockedIndex = testimonialIndex;
+            renderMemorialDemo(lockedIndex);
+            modal.dataset.memorialLockedIndex = String(lockedIndex);
+            if (testimonialTimer) {
+                clearInterval(testimonialTimer);
+                testimonialTimer = null;
+            }
+            modal.classList.add('memorial-modal--visible');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.dataset.memorialModalOpen = '1';
+        }
+
+        function closeMemorialDemoModal() {
+            const modal = document.getElementById('memorial-demo-modal');
+            if (!modal) return;
+            modal.classList.remove('memorial-modal--visible');
+            modal.setAttribute('aria-hidden', 'true');
+            delete modal.dataset.memorialLockedIndex;
+            delete document.body.dataset.memorialModalOpen;
+            startTestimonialsCarousel();
+        }
+
         function renderTestimonial(index) {
             const nameEl = document.getElementById('testimonial-name');
             const textEl = document.getElementById('testimonial-text');
+            const currentEl = document.getElementById('testimonial-current');
             if (!nameEl || !textEl) return;
             nameEl.textContent = testimonials[index].name;
             textEl.textContent = testimonials[index].text;
+            if (currentEl) currentEl.textContent = String(index + 1);
         }
 
         function startTestimonialsCarousel() {
@@ -434,14 +753,91 @@
             testimonialTimer = setInterval(() => {
                 testimonialIndex = (testimonialIndex + 1) % testimonials.length;
                 renderTestimonial(testimonialIndex);
-            }, 6000);
+            }, TESTIMONIAL_AUTO_MS);
+        }
+
+        function stepTestimonial(delta) {
+            const n = testimonials.length;
+            testimonialIndex = (testimonialIndex + delta + n) % n;
+            renderTestimonial(testimonialIndex);
+            startTestimonialsCarousel();
+        }
+
+        /**
+         * Reproductor inline: primer toque reproduce en la misma vista; pantalla completa con el botón nativo del video.
+         * playsinline + playsInline + webkit-playsinline para iOS Safari / WebViews y Chrome Android.
+         */
+        function initInlinePresentationVideo(video, overlay) {
+            if (!video || !overlay) return;
+
+            video.controls = false;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+
+            const showOverlay = () => {
+                overlay.classList.remove('is-hidden');
+            };
+            const hideOverlay = () => {
+                overlay.classList.add('is-hidden');
+            };
+
+            const onOverlayActivate = async () => {
+                video.controls = true;
+                hideOverlay();
+                try {
+                    await video.play();
+                } catch {
+                    showOverlay();
+                    video.controls = false;
+                }
+            };
+
+            overlay.addEventListener('click', onOverlayActivate);
+
+            video.addEventListener('ended', () => {
+                video.controls = false;
+                video.currentTime = 0;
+                showOverlay();
+            });
+
+            video.addEventListener('error', () => {
+                showOverlay();
+                video.controls = false;
+            });
+        }
+
+        function initHeroPresentationVideo() {
+            initInlinePresentationVideo(
+                document.getElementById('hero-presentacion-video'),
+                document.getElementById('hero-video-play-overlay')
+            );
+            initInlinePresentationVideo(
+                document.getElementById('hero-presentacion-video-mobile'),
+                document.getElementById('hero-video-play-overlay-mobile')
+            );
         }
 
         // Inicializar visuales al cargar
         window.addEventListener('load', () => {
             createStars();
+            const totalEl = document.getElementById('testimonial-total');
+            if (totalEl) totalEl.textContent = String(testimonials.length);
             renderTestimonial(testimonialIndex);
             startTestimonialsCarousel();
+            initHeroPresentationVideo();
+
+            document.getElementById('btn-ver-memorial')?.addEventListener('click', openMemorialDemoModal);
+            document.getElementById('testimonial-prev')?.addEventListener('click', () => stepTestimonial(-1));
+            document.getElementById('testimonial-next')?.addEventListener('click', () => stepTestimonial(1));
+            document.querySelectorAll('[data-memorial-demo-close]').forEach((el) => {
+                el.addEventListener('click', closeMemorialDemoModal);
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && document.body.dataset.memorialModalOpen === '1') {
+                    closeMemorialDemoModal();
+                }
+            });
         });
 
         // Recrear estrellas al cambiar tamaño de ventana
