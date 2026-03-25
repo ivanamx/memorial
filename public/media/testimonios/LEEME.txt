@@ -1,0 +1,10 @@
+Videos de demostración para cada tarjeta del carrusel de testimonios.
+Coloca aquí archivos MP4 con estos nombres (mismo orden que en index.html):
+
+  01-elena-m.mp4           → memorial Elena M. (testimonio Paola R.)
+  02-lucia-hernandez.mp4   → Lucía Hernández
+  03-roberto-vega.mp4      → Roberto Vega
+  04-marisol-cantu.mp4     → Marisol Cantú
+  05-francisco-c.mp4       → Francisco C.
+
+URL pública de cada uno: /media/testimonios/<nombre>

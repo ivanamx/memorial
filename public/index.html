@@ -443,8 +443,8 @@
 
                     <!-- Descripción secundaria -->
                     <p class="montserrat-font text-sm sm:text-base md:text-[0.875rem] md:leading-[1.55] text-mist-dim leading-relaxed">
-                        <span class="md:hidden">Para quien atraviesa un duelo reciente o para quien quiere que sus hijos conozcan a quien ya no está: Usando IA creamos videos memoriales con realismo emotivo y un mensaje final, para siempre.</span>
-                        <span class="hidden md:block">Para quien atraviesa un duelo reciente o para quien quiere que sus hijos conozcan a quien ya no está: usando IA creamos videos memoriales con realismo emotivo y un mensaje final, para siempre.</span>
+                        <span class="md:hidden">Convertirmos tus recuerdos en video lleno de emoción. Con inteligencia artificial creamos un mensaje final personalizado, un  legado que la familia podra tener para siempre. Un memorial para un duelo reciente, dejar un recuerdo para generaciones futuras o dar vida un momento captado en imagen, honramos la memoria de tu ser querido.</span>
+                        <span class="hidden md:block">Convertirmos tus recuerdos en video lleno de emoción. Con inteligencia artificial creamos un mensaje final personalizado, un  legado que la familia podra tener para siempre. Un memorial para un duelo reciente, dejar un recuerdo para generaciones futuras o dar vida a un momento captado en imagen, honramos la memoria de tu ser querido.</span>
                     </p>
 
                     <!-- Video móvil: reproducción inline; pantalla completa desde controles del sistema -->
@@ -496,7 +496,7 @@
                                 </h3>
                                 <p class="montserrat-font text-sm text-mist-dim">
                                     <span class="md:hidden">Cada pieza es única y tuya</span>
-                                    <span class="hidden md:inline">Revive y perdura tu historia</span>
+                                    <span class="hidden md:inline">Preservación emocional y familiar</span>
                                 </p>
                             </div>
                         </div>
@@ -628,17 +628,25 @@
             <p class="subtitle-font text-gold text-sm mb-1 tracking-wide">Memorial de demostración</p>
             <h2 id="memorial-demo-heading" class="subtitle-font text-white text-xl sm:text-2xl mb-0.5 pr-10">Elena M.</h2>
             <p id="memorial-demo-years" class="montserrat-font text-mist-dim text-sm mb-4">1952 — 2023</p>
-            <div class="video-frame rounded-xl overflow-hidden mb-4 border border-white/8">
-                <div class="aspect-video flex min-h-[160px] items-center justify-center bg-gradient-to-b from-[#151d38] to-[#080c18]">
-                    <div class="text-center px-6 py-8">
-                        <i class="fas fa-play-circle text-5xl sm:text-6xl text-gold-45 mb-3 opacity-90" aria-hidden="true"></i>
-                        <p class="montserrat-font text-sm text-mist font-medium">Vista previa del memorial (ejemplo)</p>
-                        <p class="montserrat-font text-xs text-mist-dim mt-2 max-w-xs mx-auto">Así podría verse tu video con fotografía animada y mensaje con voz.</p>
+            <div class="video-frame rounded-xl overflow-hidden mb-4 border border-white/8 bg-black">
+                <div class="aspect-video relative flex min-h-[160px] max-h-[min(56vh,28rem)] items-center justify-center bg-black">
+                    <video id="memorial-demo-video"
+                        class="max-h-[min(56vh,28rem)] w-full object-contain"
+                        playsinline
+                        webkit-playsinline
+                        preload="metadata"
+                        controls
+                        controlslist="nodownload"
+                        aria-label="Video del memorial de demostración"></video>
+                    <div id="memorial-demo-video-error" class="hidden absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#151d38] to-[#080c18] px-6 text-center">
+                        <i class="fas fa-film text-5xl sm:text-6xl text-gold-45 mb-3 opacity-90" aria-hidden="true"></i>
+                        <p class="montserrat-font text-sm text-mist font-medium">Vista previa no disponible</p>
+                        <p class="montserrat-font text-xs text-mist-dim mt-2 max-w-xs mx-auto">Si aún no subiste el video, colócalo en <code class="text-mist/90">public/media/testimonios/</code> con el nombre indicado en LEEME.txt.</p>
                     </div>
                 </div>
             </div>
             <p id="memorial-demo-snippet" class="montserrat-font text-mist italic text-sm leading-relaxed text-center px-1"></p>
-            <p class="montserrat-font mt-4 text-xs text-mist-dim text-center leading-relaxed">Contenido con permiso de publicación. Cada familia recibe un memorial único y confidencial.</p>
+            <p class="montserrat-font mt-4 text-xs text-mist-dim text-center leading-relaxed">Este es un segmento de memorial. Cada familia recibe un memorial de 3 a 5 minutos, único y confidencial.</p>
         </div>
     </div>
 
@@ -665,35 +673,40 @@
                 text: 'Nos ayudaron a revivir momentos de mi mamá desde sus fotos favoritas. La foto hablada con su mensaje nos hizo llorar y sanar en familia.',
                 memorialName: 'Elena M.',
                 memorialYears: '1952 — 2023',
-                memorialSnippet: '«Gracias por cada risa que dejaste en esta casa. Te llevamos en el corazón cada día.»'
+                memorialSnippet: '«Gracias por cada risa que dejaste en esta casa. Te llevamos en el corazón cada día.»',
+                memorialVideo: '/media/testimonios/01-elena-m.mp4'
             },
             {
                 name: 'Gabriela M. — Zapopan',
                 text: 'El video quedó muy humano y respetuoso. Ver a mi abuelita hablarnos de nuevo y la escuchara su bisnieto; algo que nunca vamos a olvidar.',
                 memorialName: 'Lucía Hernández',
                 memorialYears: '1938 — 2024',
-                memorialSnippet: '«Abuelita, tu ternura sigue guiándonos. Este memorial es para que las pequeñas de la familia te conozcan como te recordamos.»'
+                memorialSnippet: '«Abuelita, tu ternura sigue guiándonos. Este memorial es para que las pequeñas de la familia te conozcan como te recordamos.»',
+                memorialVideo: '/media/testimonios/02-lucia-hernandez.mp4'
             },
             {
                 name: 'Fernanda T. — CDMX',
                 text: 'Pensamos que sería algo frío, pero fue todo lo contrario. Cada imagen contó su historia y el mensaje final se sintió como un abrazo.',
                 memorialName: 'Roberto Vega',
                 memorialYears: '1960 — 2023',
-                memorialSnippet: '«Papá, guardamos tus enseñanzas en silencio y en canción. Gracias por enseñarnos a abrazar la vida.»'
+                memorialSnippet: '«Papá, guardamos tus enseñanzas en silencio y en canción. Gracias por enseñarnos a abrazar la vida.»',
+                memorialVideo: '/media/testimonios/03-roberto-vega.mp4'
             },
             {
                 name: 'Rocío L. — Torreón',
                 text: 'Gracias por la sensibilidad en cada detalle. Mi familia pudo volver a sonreír recordando su vida con amor y no solo con tristeza.',
                 memorialName: 'Marisol Cantú',
                 memorialYears: '1955 — 2022',
-                memorialSnippet: '«Mamá, tu luz no se apaga: vive en cada recuerdo que compartimos en familia. Te queremos para siempre.»'
+                memorialSnippet: '«Mamá, tu luz no se apaga: vive en cada recuerdo que compartimos en familia. Te queremos para siempre.»',
+                memorialVideo: '/media/testimonios/04-marisol-cantu.mp4'
             },
             {
                 name: 'Javier C. — Toluca',
                 text: 'Nunca había visto algo así. Con las fotos de mi papá lograron un homenaje muy digno; su voz en el mensaje final nos dio paz.',
                 memorialName: 'Francisco C.',
                 memorialYears: '1948 — 2021',
-                memorialSnippet: '«Gracias por tu voz firme y tu risa tranquila. Este homenaje es el abrazo que ya no te podemos dar.»'
+                memorialSnippet: '«Gracias por tu voz firme y tu risa tranquila. Este homenaje es el abrazo que ya no te podemos dar.»',
+                memorialVideo: '/media/testimonios/05-francisco-c.mp4'
             }
         ];
 
@@ -707,10 +720,27 @@
             const heading = document.getElementById('memorial-demo-heading');
             const years = document.getElementById('memorial-demo-years');
             const snippet = document.getElementById('memorial-demo-snippet');
+            const video = document.getElementById('memorial-demo-video');
+            const errEl = document.getElementById('memorial-demo-video-error');
             if (!heading || !years || !snippet) return;
             heading.textContent = t.memorialName;
             years.textContent = t.memorialYears;
             snippet.textContent = t.memorialSnippet;
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+                const url = t.memorialVideo || '';
+                if (url) {
+                    errEl?.classList.add('hidden');
+                    if (video.src !== new URL(url, window.location.href).href) {
+                        video.src = url;
+                    }
+                    video.load();
+                } else {
+                    video.removeAttribute('src');
+                    errEl?.classList.remove('hidden');
+                }
+            }
         }
 
         function openMemorialDemoModal() {
@@ -731,6 +761,11 @@
         function closeMemorialDemoModal() {
             const modal = document.getElementById('memorial-demo-modal');
             if (!modal) return;
+            const video = document.getElementById('memorial-demo-video');
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+            }
             modal.classList.remove('memorial-modal--visible');
             modal.setAttribute('aria-hidden', 'true');
             delete modal.dataset.memorialLockedIndex;
@@ -826,6 +861,17 @@
             renderTestimonial(testimonialIndex);
             startTestimonialsCarousel();
             initHeroPresentationVideo();
+
+            const demoVideo = document.getElementById('memorial-demo-video');
+            const demoVideoError = document.getElementById('memorial-demo-video-error');
+            if (demoVideo && demoVideoError) {
+                demoVideo.addEventListener('error', () => {
+                    demoVideoError.classList.remove('hidden');
+                });
+                demoVideo.addEventListener('loadeddata', () => {
+                    demoVideoError.classList.add('hidden');
+                });
+            }
 
             document.getElementById('btn-ver-memorial')?.addEventListener('click', openMemorialDemoModal);
             document.getElementById('testimonial-prev')?.addEventListener('click', () => stepTestimonial(-1));
