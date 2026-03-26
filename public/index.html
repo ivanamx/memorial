@@ -217,6 +217,8 @@
         }
 
         .hero-video-el {
+            position: relative;
+            z-index: 0;
             display: block;
             width: auto;
             height: auto;
@@ -233,6 +235,7 @@
 
         .hero-video-overlay {
             position: absolute;
+            z-index: 1;
             inset: 0;
             display: flex;
             flex-direction: column;
@@ -241,18 +244,34 @@
             gap: 0.35rem;
             padding: 1rem;
             border: none;
-            background: rgba(5, 8, 20, 0.45);
+            /* Viñeta suave: el video se ve casi entero; antes parecía un cartel opaco */
+            background: radial-gradient(
+                ellipse 95% 90% at 50% 48%,
+                rgba(8, 12, 24, 0.08) 0%,
+                rgba(8, 12, 24, 0.22) 45%,
+                rgba(5, 8, 20, 0.55) 100%
+            );
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, opacity 0.2s ease;
         }
 
         .hero-video-overlay:hover {
-            background: rgba(5, 8, 20, 0.28);
+            background: radial-gradient(
+                ellipse 95% 90% at 50% 48%,
+                rgba(8, 12, 24, 0.05) 0%,
+                rgba(8, 12, 24, 0.16) 45%,
+                rgba(5, 8, 20, 0.42) 100%
+            );
         }
 
         .hero-video-overlay:focus-visible {
             outline: 2px solid rgba(201, 169, 98, 0.65);
             outline-offset: 2px;
+        }
+
+        .hero-video-overlay .subtitle-font,
+        .hero-video-overlay .montserrat-font {
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.92), 0 0 18px rgba(0, 0, 0, 0.5);
         }
 
         .hero-video-overlay.is-hidden {
@@ -270,6 +289,8 @@
         }
 
         .hero-video-mobile-el {
+            position: relative;
+            z-index: 0;
             display: block;
             width: 100%;
             height: 100%;
@@ -455,15 +476,17 @@
                                     class="hero-video-mobile-el"
                                     playsinline
                                     webkit-playsinline
-                                    preload="metadata"
+                                    muted
+                                    preload="auto"
+                                    poster="/media/presentacion-poster.jpg"
                                     controlslist="nodownload">
                                     <source src="/presentacion.mp4" type="video/mp4">
                                     <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
                                 </video>
                                 <button type="button" id="hero-video-play-overlay-mobile" class="hero-video-overlay hero-video-overlay--touch" aria-label="Reproducir vista previa en esta pantalla">
                                     <i class="fas fa-play-circle text-5xl text-gold-50 opacity-95 drop-shadow-lg" aria-hidden="true"></i>
-                                    <span class="subtitle-font text-base font-semibold text-white">Vista previa</span>
-                                    <span class="montserrat-font text-xs text-mist-dim text-center px-2 max-w-[18rem]">Realismo emotivo en movimiento · Pantalla completa en el reproductor</span>
+                                    <span class="subtitle-font text-base font-semibold text-white">Mira como funciona.</span>
+                                    <span class="montserrat-font text-xs text-mist-dim text-center px-2 max-w-[18rem]">Realismo emotivo en movimiento · Voz genérica o clonada</span>
                                 </button>
                             </div>
                         </div>
@@ -545,15 +568,15 @@
                     <div class="hero-video-outer hidden md:flex shrink-0">
                         <div class="video-frame frame-glow bg-black/40 overflow-hidden w-fit max-w-full">
                             <div class="hero-video-wrap">
-                            <!-- Coloca tu archivo en /presentacion.mp4 o cambia las rutas del <source> -->
-                            <video id="hero-presentacion-video" class="hero-video-el" playsinline webkit-playsinline preload="metadata" controlslist="nodownload">
+                            <!-- Video: /presentacion.mp4 · Miniatura: /media/presentacion-poster.jpg (regenerar si cambias el mp4) -->
+                            <video id="hero-presentacion-video" class="hero-video-el" playsinline webkit-playsinline muted preload="auto" poster="/media/presentacion-poster.jpg" controlslist="nodownload">
                                 <source src="/presentacion.mp4" type="video/mp4">
                                 <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
                             </video>
                             <button type="button" id="hero-video-play-overlay" class="hero-video-overlay hero-video-overlay--touch" aria-label="Reproducir vista previa en esta ventana">
                                 <i class="fas fa-play-circle text-6xl md:text-5xl text-gold-45 opacity-95 drop-shadow-lg" aria-hidden="true"></i>
-                                <span class="subtitle-font text-base font-semibold text-white">Vista previa</span>
-                                <span class="montserrat-font text-xs text-mist-dim text-center">Realismo emotivo en movimiento · Pantalla completa desde los controles del reproductor</span>
+                                <span class="subtitle-font text-base font-semibold text-white">Mira cómo funciona.</span>
+                                <span class="montserrat-font text-xs text-mist-dim text-center">Realismo emotivo en movimiento · Voz genérica o clonada</span>
                             </button>
                             </div>
                         </div>
@@ -792,6 +815,41 @@
             startTestimonialsCarousel();
         }
 
+        /** Segundo aproximado para miniatura: muchos videos empiezan en negro (fade-in). */
+        const PRESENTATION_PREVIEW_OFFSET_SEC = 1;
+
+        /**
+         * Deja el video en un fotograma visible para la vista previa (no confundir con frame 0 = negro).
+         * Escucha loadeddata y canplay por si cambia el <source> tras error.
+         */
+        function primePresentationThumbnail(video) {
+            if (!video) return;
+            if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+                const onReady = () => {
+                    video.removeEventListener('loadeddata', onReady);
+                    video.removeEventListener('canplay', onReady);
+                    primePresentationThumbnail(video);
+                };
+                video.addEventListener('loadeddata', onReady);
+                video.addEventListener('canplay', onReady);
+                return;
+            }
+            let t = PRESENTATION_PREVIEW_OFFSET_SEC;
+            if (Number.isFinite(video.duration) && video.duration > 0) {
+                t = Math.min(PRESENTATION_PREVIEW_OFFSET_SEC, Math.max(0.05, video.duration - 0.05));
+            }
+            const onSeeked = () => {
+                video.pause();
+                video.removeEventListener('seeked', onSeeked);
+            };
+            video.addEventListener('seeked', onSeeked, { once: true });
+            try {
+                video.currentTime = t;
+            } catch {
+                video.removeEventListener('seeked', onSeeked);
+            }
+        }
+
         /**
          * Reproductor inline: primer toque reproduce en la misma vista; pantalla completa con el botón nativo del video.
          * playsinline + playsInline + webkit-playsinline para iOS Safari / WebViews y Chrome Android.
@@ -815,6 +873,8 @@
                 video.controls = true;
                 hideOverlay();
                 try {
+                    video.muted = false;
+                    video.currentTime = 0;
                     await video.play();
                 } catch {
                     showOverlay();
@@ -826,7 +886,7 @@
 
             video.addEventListener('ended', () => {
                 video.controls = false;
-                video.currentTime = 0;
+                primePresentationThumbnail(video);
                 showOverlay();
             });
 
@@ -837,14 +897,12 @@
         }
 
         function initHeroPresentationVideo() {
-            initInlinePresentationVideo(
-                document.getElementById('hero-presentacion-video'),
-                document.getElementById('hero-video-play-overlay')
-            );
-            initInlinePresentationVideo(
-                document.getElementById('hero-presentacion-video-mobile'),
-                document.getElementById('hero-video-play-overlay-mobile')
-            );
+            const desktop = document.getElementById('hero-presentacion-video');
+            const mobile = document.getElementById('hero-presentacion-video-mobile');
+            initInlinePresentationVideo(desktop, document.getElementById('hero-video-play-overlay'));
+            initInlinePresentationVideo(mobile, document.getElementById('hero-video-play-overlay-mobile'));
+            primePresentationThumbnail(desktop);
+            primePresentationThumbnail(mobile);
         }
 
         // Inicializar visuales al cargar
