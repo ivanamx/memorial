@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Misma base que en index.html (meta OG y canonical).
+Sitemap: https://memorialescelestiales.com/sitemap.xml

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://memorialescelestiales.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://memorialescelestiales.com/preguntas-frecuentes.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://memorialescelestiales.com/terminos-y-condiciones.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.35</priority>
+  </url>
+  <url>
+    <loc>https://memorialescelestiales.com/politica-de-privacidad.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.35</priority>
+  </url>
+</urlset>
