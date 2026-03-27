@@ -233,9 +233,25 @@
             }
         }
 
+        /* Miniatura estática hasta reproducir (misma ruta que poster del <video>) */
+        .hero-video-poster-img {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            background: #080c18;
+        }
+
+        .hero-video-poster-img.is-hidden {
+            display: none;
+        }
+
         .hero-video-overlay {
             position: absolute;
-            z-index: 1;
+            z-index: 2;
             inset: 0;
             display: flex;
             flex-direction: column;
@@ -464,8 +480,8 @@
 
                     <!-- Descripción secundaria -->
                     <p class="montserrat-font text-sm sm:text-base md:text-[0.875rem] md:leading-[1.55] text-mist-dim leading-relaxed">
-                        <span class="md:hidden">Convertimos tus recuerdos en un video lleno de emoción. Con inteligencia artificial creamos un mensaje final personalizado, un  legado que la familia podra tener para siempre. Un memorial para un duelo reciente, dejar un recuerdo para generaciones futuras o dar vida un momento captado en imagen, honramos la memoria de tu ser querido.</span>
-                        <span class="hidden md:block">Convertimos tus recuerdos en un video lleno de emoción. Con inteligencia artificial creamos un mensaje final personalizado, un  legado que la familia podra tener para siempre. Un memorial para un duelo reciente, dejar un recuerdo para generaciones futuras o dar vida a un momento captado en imagen, honramos la memoria de tu ser querido.</span>
+                        <span class="md:hidden">Convertimos tus recuerdos en un video lleno de emoción. Usando inteligencia artificial optimizamos imágenes y creamos un memorial para honrar a quien más quieres, incluyendo un mensaje final desde una fotografía hablante, un momento familiar para siempre. Un memorial para un duelo reciente, dejar un recuerdo para generaciones futuras o animar una imagen, donde mantendremos vivo el recuerdo de tus seres queridos.</span>
+                        <span class="hidden md:block">Convertimos tus recuerdos en un video lleno de emoción. Usando inteligencia artificial optimizamos imágenes y creamos un memorial para honrar a quien más quieres, incluyendo un mensaje final desde una fotografía hablante, un momento familiar para siempre. Un memorial para un duelo reciente, dejar un recuerdo para generaciones futuras o animar una imagen, donde mantendremos vivo el recuerdo de tus seres queridos.</span>
                     </p>
 
                     <!-- Video móvil: reproducción inline; pantalla completa desde controles del sistema -->
@@ -483,6 +499,7 @@
                                     <source src="/presentacion.mp4" type="video/mp4">
                                     <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
                                 </video>
+                                <img id="hero-presentacion-poster-mobile" class="hero-video-poster-img" src="/media/presentacion-poster.jpg" alt="" width="1280" height="720" decoding="async">
                                 <button type="button" id="hero-video-play-overlay-mobile" class="hero-video-overlay hero-video-overlay--touch" aria-label="Reproducir vista previa en esta pantalla">
                                     <i class="fas fa-play-circle text-5xl text-gold-50 opacity-95 drop-shadow-lg" aria-hidden="true"></i>
                                     <span class="subtitle-font text-base font-semibold text-white">Mira como funciona.</span>
@@ -535,7 +552,7 @@
                             <i class="fas fa-bolt text-gold-muted text-xl md:text-lg mt-1"></i>
                             <div>
                                 <h3 class="subtitle-font font-semibold text-white text-sm md:text-base">Entrega ágil</h3>
-                                <p class="montserrat-font text-sm text-mist-dim">En hasta 24 horas</p>
+                                <p class="montserrat-font text-sm text-mist-dim">En menos de 24 horas</p>
                             </div>
                         </div>
                     </div>
@@ -573,6 +590,7 @@
                                 <source src="/presentacion.mp4" type="video/mp4">
                                 <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
                             </video>
+                            <img id="hero-presentacion-poster-desktop" class="hero-video-poster-img" src="/media/presentacion-poster.jpg" alt="" width="1280" height="720" decoding="async">
                             <button type="button" id="hero-video-play-overlay" class="hero-video-overlay hero-video-overlay--touch" aria-label="Reproducir vista previa en esta ventana">
                                 <i class="fas fa-play-circle text-6xl md:text-5xl text-gold-45 opacity-95 drop-shadow-lg" aria-hidden="true"></i>
                                 <span class="subtitle-font text-base font-semibold text-white">Mira cómo funciona.</span>
@@ -815,46 +833,11 @@
             startTestimonialsCarousel();
         }
 
-        /** Segundo aproximado para miniatura: muchos videos empiezan en negro (fade-in). */
-        const PRESENTATION_PREVIEW_OFFSET_SEC = 1;
-
-        /**
-         * Deja el video en un fotograma visible para la vista previa (no confundir con frame 0 = negro).
-         * Escucha loadeddata y canplay por si cambia el <source> tras error.
-         */
-        function primePresentationThumbnail(video) {
-            if (!video) return;
-            if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
-                const onReady = () => {
-                    video.removeEventListener('loadeddata', onReady);
-                    video.removeEventListener('canplay', onReady);
-                    primePresentationThumbnail(video);
-                };
-                video.addEventListener('loadeddata', onReady);
-                video.addEventListener('canplay', onReady);
-                return;
-            }
-            let t = PRESENTATION_PREVIEW_OFFSET_SEC;
-            if (Number.isFinite(video.duration) && video.duration > 0) {
-                t = Math.min(PRESENTATION_PREVIEW_OFFSET_SEC, Math.max(0.05, video.duration - 0.05));
-            }
-            const onSeeked = () => {
-                video.pause();
-                video.removeEventListener('seeked', onSeeked);
-            };
-            video.addEventListener('seeked', onSeeked, { once: true });
-            try {
-                video.currentTime = t;
-            } catch {
-                video.removeEventListener('seeked', onSeeked);
-            }
-        }
-
         /**
          * Reproductor inline: primer toque reproduce en la misma vista; pantalla completa con el botón nativo del video.
          * playsinline + playsInline + webkit-playsinline para iOS Safari / WebViews y Chrome Android.
          */
-        function initInlinePresentationVideo(video, overlay) {
+        function initInlinePresentationVideo(video, overlay, posterImg) {
             if (!video || !overlay) return;
 
             video.controls = false;
@@ -872,11 +855,13 @@
             const onOverlayActivate = async () => {
                 video.controls = true;
                 hideOverlay();
+                posterImg?.classList.add('is-hidden');
                 try {
                     video.muted = false;
                     video.currentTime = 0;
                     await video.play();
                 } catch {
+                    posterImg?.classList.remove('is-hidden');
                     showOverlay();
                     video.controls = false;
                 }
@@ -886,11 +871,12 @@
 
             video.addEventListener('ended', () => {
                 video.controls = false;
-                primePresentationThumbnail(video);
+                posterImg?.classList.remove('is-hidden');
                 showOverlay();
             });
 
             video.addEventListener('error', () => {
+                posterImg?.classList.remove('is-hidden');
                 showOverlay();
                 video.controls = false;
             });
@@ -899,10 +885,8 @@
         function initHeroPresentationVideo() {
             const desktop = document.getElementById('hero-presentacion-video');
             const mobile = document.getElementById('hero-presentacion-video-mobile');
-            initInlinePresentationVideo(desktop, document.getElementById('hero-video-play-overlay'));
-            initInlinePresentationVideo(mobile, document.getElementById('hero-video-play-overlay-mobile'));
-            primePresentationThumbnail(desktop);
-            primePresentationThumbnail(mobile);
+            initInlinePresentationVideo(desktop, document.getElementById('hero-video-play-overlay'), document.getElementById('hero-presentacion-poster-desktop'));
+            initInlinePresentationVideo(mobile, document.getElementById('hero-video-play-overlay-mobile'), document.getElementById('hero-presentacion-poster-mobile'));
         }
 
         // Inicializar visuales al cargar
